@@ -2,6 +2,8 @@
 
 A simple and reasonable module for processing the Roblox API dump from inside Roblox. In addition to fulfilling a use case, this module also acted as an experimental use of Roblox's typed Luau. As a result, this module can be considered to be fully typesafe.
 
+This module pulls directly from Roblox's CDN, so it requires two HTTP requests to be sent when it's first required. Both of these requests are simple GET requests.
+
 To get the project, you can either build it using [Rojo](https://github.com/Roblox/rojo) v0.5.4 by running `rojo build build.project.json -o API.rbxm` or by grabbing the latest version from [Releases](https://github.com/dekkonot/rbx-api-dump/releases).
 
 ## API
