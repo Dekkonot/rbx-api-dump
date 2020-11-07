@@ -59,7 +59,7 @@ Would return a list of classes that weren't deprecated.
 ### getEnums
 
 ```plaintext
-API.getEmums(filter: Array<string>?): Array<string>
+API.getEnums(filter: Array<string>?): Array<string>
 ```
 
 Returns a list of Enum names. If `filter` is provided, it functions identically to the `filter` in [`getClasses`](#getclasses).
