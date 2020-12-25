@@ -334,13 +334,13 @@ function API.getEnums(filter: Array<string>?): Array<string>
 	return enumList
 end
 
-coroutine.resume(coroutine.create(function(...)
+coroutine.resume(coroutine.create(function()
 	local succ, err = pcall(tryAPI)
 	if not succ then
 		warn(string.format(API_REQUEST_FAILED_MESSAGE, err, 0))
 		local step = 1
 		local accum = 0
-		local tryConnection; tryConnection = RunService.Stepped:Connect(function(_, delta, ...)
+		local tryConnection; tryConnection = RunService.Heartbeat:Connect(function(delta)
 			accum += delta
 			if accum <= step then return end
 			accum = 0
@@ -350,13 +350,13 @@ coroutine.resume(coroutine.create(function(...)
 			
 			if succ then
 				tryConnection:Disconnect()
-				ReadyBindable:Fire(...)
+				ReadyBindable:Fire()
 			else
 				warn(string.format(API_REQUEST_FAILED_MESSAGE, err, step))
 			end
 		end)
 	else
-		ReadyBindable:Fire(...)
+		ReadyBindable:Fire()
 	end
 end))
 
