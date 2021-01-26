@@ -28,7 +28,9 @@ local lookupify = Util.lookupify
 local cloneMember = Util.cloneMember
 
 local function tryAPI(): ()
-	if dump then return end
+	if dump then
+		return
+	end
 
 	dump = FetchApi()
 
@@ -76,8 +78,12 @@ function API.getMembers(class: string, tagFilter: Array<string>?, securityFilter
 	local memberList: Dictionary<ApiTypes.Member> = {}
 	for _, superClass in ipairs(superClasses) do
 		for _, v in ipairs(superClass.Members) do
-			if filterSecurity(v.Security, securityLookup) then continue end
-			if filterTags(v.Tags, tagLookup) then continue end
+			if filterSecurity(v.Security, securityLookup) then
+				continue
+			end
+			if filterTags(v.Tags, tagLookup) then
+				continue
+			end
 
 			memberList[v.Name] = cloneMember(v)
 		end
@@ -102,9 +108,15 @@ function API.getProperties(class: string, tagFilter: Array<string>?, securityFil
 	local memberList: Dictionary<ApiTypes.Property> = {}
 	for _, superClass in ipairs(superClasses) do
 		for _, v in ipairs(superClass.Members) do
-			if v.MemberType ~= "Property" then continue end
-			if filterSecurity(v.Security, securityLookup) then continue end
-			if filterTags(v.Tags, tagLookup) then continue end
+			if v.MemberType ~= "Property" then
+				continue
+			end
+			if filterSecurity(v.Security, securityLookup) then
+				continue
+			end
+			if filterTags(v.Tags, tagLookup) then
+				continue
+			end
 
 			memberList[v.Name] = cloneMember(v)
 		end
@@ -129,9 +141,15 @@ function API.getFunctions(class: string, tagFilter: Array<string>?, securityFilt
 	local memberList: Dictionary<ApiTypes.Function> = {}
 	for _, superClass in ipairs(superClasses) do
 		for _, v in ipairs(superClass.Members) do
-			if v.MemberType ~= "Function" then continue end
-			if filterSecurity(v.Security, securityLookup) then continue end
-			if filterTags(v.Tags, tagLookup) then continue end
+			if v.MemberType ~= "Function" then
+				continue
+			end
+			if filterSecurity(v.Security, securityLookup) then
+				continue
+			end
+			if filterTags(v.Tags, tagLookup) then
+				continue
+			end
 
 			memberList[v.Name] = cloneMember(v)
 		end
@@ -156,9 +174,15 @@ function API.getEvents(class: string, tagFilter: Array<string>?, securityFilter:
 	local memberList: Dictionary<ApiTypes.Event> = {}
 	for _, superClass in ipairs(superClasses) do
 		for _, v in ipairs(superClass.Members) do
-			if v.MemberType ~= "Event" then continue end
-			if filterSecurity(v.Security, securityLookup) then continue end
-			if filterTags(v.Tags, tagLookup) then continue end
+			if v.MemberType ~= "Event" then
+				continue
+			end
+			if filterSecurity(v.Security, securityLookup) then
+				continue
+			end
+			if filterTags(v.Tags, tagLookup) then
+				continue
+			end
 
 			memberList[v.Name] = cloneMember(v)
 		end
@@ -183,9 +207,15 @@ function API.getCallbacks(class: string, tagFilter: Array<string>?, securityFilt
 	local memberList: Dictionary<ApiTypes.Callback> = {}
 	for _, superClass in ipairs(superClasses) do
 		for _, v in ipairs(superClass.Members) do
-			if v.MemberType ~= "Callback" then continue end
-			if filterSecurity(v.Security, securityLookup) then continue end
-			if filterTags(v.Tags, tagLookup) then continue end
+			if v.MemberType ~= "Callback" then
+				continue
+			end
+			if filterSecurity(v.Security, securityLookup) then
+				continue
+			end
+			if filterTags(v.Tags, tagLookup) then
+				continue
+			end
 
 			memberList[v.Name] = cloneMember(v)
 		end
@@ -240,7 +270,7 @@ function API.getTags(class: string, member: string?): Array<string>
 		local tags: typeof(classTable.Tags) = classTable.Tags
 		if tags then
 			for i: number, tag in ipairs(tags) do
-				tags[i] = tag	
+				tags[i] = tag
 			end
 		end
 	end
@@ -258,7 +288,7 @@ function API.isDeprecated(class: string, member: string?): boolean
 	end
 
 	if member then
-		local members = API.getMembers(class, {"Deprecated"})
+		local members = API.getMembers(class, { "Deprecated" })
 		if members[member] then
 			return true
 		else
@@ -305,7 +335,9 @@ function API.getClasses(filter: Array<string>?): Array<string>
 	local classCount = 1
 
 	for _, v in ipairs(dump.Classes) do
-		if filterTags(v.Tags, tagLookup) then continue end
+		if filterTags(v.Tags, tagLookup) then
+			continue
+		end
 
 		classList[classCount] = v.Name
 		classCount += 1
@@ -325,7 +357,9 @@ function API.getEnums(filter: Array<string>?): Array<string>
 	local enumCount = 1
 
 	for _, v in ipairs(dump.Enums) do
-		if filterTags(v.Tags, tagLookup) then continue end
+		if filterTags(v.Tags, tagLookup) then
+			continue
+		end
 
 		enumList[enumCount] = v.Name
 		enumCount += 1
@@ -340,9 +374,12 @@ coroutine.resume(coroutine.create(function()
 		warn(string.format(API_REQUEST_FAILED_MESSAGE, err, 0))
 		local step = 1
 		local accum = 0
-		local tryConnection; tryConnection = RunService.Heartbeat:Connect(function(delta)
+		local tryConnection
+		tryConnection = RunService.Heartbeat:Connect(function(delta)
 			accum += delta
-			if accum <= step then return end
+			if accum <= step then
+				return
+			end
 			accum = 0
 			step *= 2
 

@@ -18,13 +18,13 @@ local function fetch(url: string, what: string): string
 		Url = url,
 		Method = "GET",
 	})
-	
+
 	if not got then
 		error(string.format(REQUEST_FAILED_MESSAGE, what, result), 3)
 	elseif result.StatusCode ~= 200 then
 		error(string.format(BAD_RESULT_MESSAGE, what, result.StatusCode), 3)
 	end
-	
+
 	return result.Body
 end
 
@@ -32,12 +32,12 @@ end
 local function fetchAPI(): ApiTypes.API
 	local versionGuid = fetch(GET_VERSION_URL, "Roblox version GUID")
 	local dump = fetch(string.format(GET_API_JSON_URL, versionGuid), "API dump")
-	
+
 	local decoded, apiDump = pcall(HttpService.JSONDecode, HttpService, dump)
 	if not decoded then
 		error(string.format(JSON_DECODE_FAILURE_MESSAGE, apiDump), 2)
 	end
-	
+
 	return apiDump
 end
 

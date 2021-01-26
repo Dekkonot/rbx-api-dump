@@ -72,7 +72,7 @@ function Util.cloneMember(member: ApiTypes.Member): ApiTypes.Property | ApiTypes
 			Name = member.Name,
 			Parameters = member.Parameters,
 			Security = member.Security,
-			Tags = member.Tags
+			Tags = member.Tags,
 		}
 		return newMember
 	elseif memberType == "Callback" then
@@ -87,7 +87,7 @@ function Util.cloneMember(member: ApiTypes.Member): ApiTypes.Property | ApiTypes
 		return newMember
 	else
 		error(string.format(BAD_MEMBER_TYPE_MESSAGE, memberType), 2)
-	end	
+	end
 end
 
 return Util
