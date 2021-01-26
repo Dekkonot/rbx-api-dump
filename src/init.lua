@@ -74,8 +74,8 @@ function API.getMembers(class: string, tagFilter: Array<string>?, securityFilter
 	local securityLookup: Dictionary<boolean> = lookupify(securityFilter)
 
 	local memberList: Dictionary<ApiTypes.Member> = {}
-	for _, class in ipairs(superClasses) do
-		for _, v in ipairs(class.Members) do
+	for _, superClass in ipairs(superClasses) do
+		for _, v in ipairs(superClass.Members) do
 			if filterSecurity(v.Security, securityLookup) then continue end
 			if filterTags(v.Tags, tagLookup) then continue end
 
@@ -100,8 +100,8 @@ function API.getProperties(class: string, tagFilter: Array<string>?, securityFil
 	local securityLookup: Dictionary<boolean> = lookupify(securityFilter)
 
 	local memberList: Dictionary<ApiTypes.Property> = {}
-	for _, class in ipairs(superClasses) do
-		for _, v in ipairs(class.Members) do
+	for _, superClass in ipairs(superClasses) do
+		for _, v in ipairs(superClass.Members) do
 			if v.MemberType ~= "Property" then continue end
 			if filterSecurity(v.Security, securityLookup) then continue end
 			if filterTags(v.Tags, tagLookup) then continue end
@@ -127,8 +127,8 @@ function API.getFunctions(class: string, tagFilter: Array<string>?, securityFilt
 	local securityLookup: Dictionary<boolean> = lookupify(securityFilter)
 
 	local memberList: Dictionary<ApiTypes.Function> = {}
-	for _, class in ipairs(superClasses) do
-		for _, v in ipairs(class.Members) do
+	for _, superClass in ipairs(superClasses) do
+		for _, v in ipairs(superClass.Members) do
 			if v.MemberType ~= "Function" then continue end
 			if filterSecurity(v.Security, securityLookup) then continue end
 			if filterTags(v.Tags, tagLookup) then continue end
@@ -154,8 +154,8 @@ function API.getEvents(class: string, tagFilter: Array<string>?, securityFilter:
 	local securityLookup: Dictionary<boolean> = lookupify(securityFilter)
 
 	local memberList: Dictionary<ApiTypes.Event> = {}
-	for _, class in ipairs(superClasses) do
-		for _, v in ipairs(class.Members) do
+	for _, superClass in ipairs(superClasses) do
+		for _, v in ipairs(superClass.Members) do
 			if v.MemberType ~= "Event" then continue end
 			if filterSecurity(v.Security, securityLookup) then continue end
 			if filterTags(v.Tags, tagLookup) then continue end
@@ -181,8 +181,8 @@ function API.getCallbacks(class: string, tagFilter: Array<string>?, securityFilt
 	local securityLookup: Dictionary<boolean> = lookupify(securityFilter)
 
 	local memberList: Dictionary<ApiTypes.Callback> = {}
-	for _, class in ipairs(superClasses) do
-		for _, v in ipairs(class.Members) do
+	for _, superClass in ipairs(superClasses) do
+		for _, v in ipairs(superClass.Members) do
 			if v.MemberType ~= "Callback" then continue end
 			if filterSecurity(v.Security, securityLookup) then continue end
 			if filterTags(v.Tags, tagLookup) then continue end
@@ -205,8 +205,8 @@ function API.getSuperclasses(class: string): Array<string>
 	end
 
 	local list = {}
-	for i, class in ipairs(superClasses) do
-		list[i] = class.Name
+	for i, superClass in ipairs(superClasses) do
+		list[i] = superClass.Name
 	end
 
 	return list
