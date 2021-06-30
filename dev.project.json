@@ -1,0 +1,12 @@
+{
+  "name": "API",
+  "tree": {
+    "$className": "DataModel",
+    "ReplicatedStorage": {
+      "$className": "ReplicatedStorage",
+      "API": {
+        "$path": "src"
+      }
+    }
+  }
+}
