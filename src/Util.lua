@@ -5,6 +5,7 @@ type Array<T> = { [number]: T }
 
 local BAD_MEMBER_TYPE_MESSAGE = "Unexpected member type `%s` (expected `Property`, `Function`, `Event`, or `Callback`)"
 
+-- selene: allow(unused_variable)
 local ApiTypes = require(script.Parent.ApiTypes)
 
 local Util = {}
@@ -43,7 +44,9 @@ end
 -- As before, there's no way to refine table types at the moment, so this has to be unstrict.
 -- Despite that, it's perfectly type safe, so I feel comfortable putting it into production.
 -- It just lets us be a bit more specific with the returns of functions like `getProperty`.
-function Util.cloneMember(member: ApiTypes.Member): ApiTypes.Property | ApiTypes.Function | ApiTypes.Event | ApiTypes.Callback
+function Util.cloneMember(
+	member: ApiTypes.Member
+): ApiTypes.Property | ApiTypes.Function | ApiTypes.Event | ApiTypes.Callback
 	local memberType = member.MemberType
 	if memberType == "Property" then
 		local newMember: ApiTypes.Property = {

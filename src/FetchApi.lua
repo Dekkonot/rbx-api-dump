@@ -9,6 +9,7 @@ local REQUEST_FAILED_MESSAGE = "Request to fetch `%s` failed because: %s"
 local BAD_RESULT_MESSAGE = "Request to fetch `%s` returned bad status code `%i` (expected `200`)"
 local JSON_DECODE_FAILURE_MESSAGE = "Failed to decode API dump because: %s"
 
+-- selene: allow(unused_variable)
 local ApiTypes = require(script.Parent.ApiTypes)
 
 --- Sends a GET request to `url`. If the result is invalid, uses `what` to throw an appropriate error.
