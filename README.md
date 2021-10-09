@@ -4,7 +4,10 @@ A simple and reasonable module for processing the Roblox API dump from inside Ro
 
 This module pulls directly from Roblox's CDN, so it requires two HTTP requests to be sent when it's first required. Both of these requests are simple GET requests.
 
-To get the project, you can either build it using [Rojo](https://github.com/Roblox/rojo) v0.5.4 by running `rojo build build.project.json -o API.rbxm` or by grabbing the latest version from [Releases](https://github.com/dekkonot/rbx-api-dump/releases).
+To get the project you can:
+ - Build it using [Rojo](https://github.com/Roblox/rojo) 6+ by running `rojo build -o api-dump.rbxmx`
+ - Grab the latest version from [Releases](https://github.com/dekkonot/rbx-api-dump/releases)
+ - Install it using [Wally](https://github.com/UpliftGames/wally) by referencing `dekkonot/api-dump`
 
 ## API
 
