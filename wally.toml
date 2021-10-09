@@ -1,0 +1,12 @@
+[package]
+name = "dekkonot/api-dump"
+
+description = "A simple and reasonable module for working with the API dump from inside Roblox."
+version = "1.0.2"
+
+license = "MIT"
+authors = ["Micah Reid <dekkonot@rocketmail.com>"]
+realm = "shared"
+registry = "https://github.com/upliftgames/wally-index"
+
+[dependencies]
