@@ -10,7 +10,9 @@ local MODULE_NOT_READY_MESSAGE = "API has not been fetched yet; try using API.is
 local CLASS_NOT_REAL_MESSAGE = "Class `%s` is not a valid Roblox class"
 local API_REQUEST_FAILED_MESSAGE = "Could not get API dump: `%s`. Retrying in %i seconds."
 
+--selene: allow(unused_variable)
 local ApiTypes = require(script.ApiTypes)
+
 local FetchApi = require(script.FetchApi)
 local Filters = require(script.Filters)
 local Util = require(script.Util)
@@ -62,7 +64,11 @@ function API.isReady()
 	return not not dump
 end
 
-function API.getMembers(class: string, tagFilter: Array<string>?, securityFilter: Array<string>?): Dictionary<ApiTypes.Member>
+function API.getMembers(
+	class: string,
+	tagFilter: Array<string>?,
+	securityFilter: Array<string>?
+): Dictionary<ApiTypes.Member>
 	if not dump then
 		error(MODULE_NOT_READY_MESSAGE, 2)
 	end
@@ -92,7 +98,11 @@ function API.getMembers(class: string, tagFilter: Array<string>?, securityFilter
 	return memberList
 end
 
-function API.getProperties(class: string, tagFilter: Array<string>?, securityFilter: Array<string>?): Dictionary<ApiTypes.Property>
+function API.getProperties(
+	class: string,
+	tagFilter: Array<string>?,
+	securityFilter: Array<string>?
+): Dictionary<ApiTypes.Property>
 	if not dump then
 		error(MODULE_NOT_READY_MESSAGE, 2)
 	end
@@ -125,7 +135,11 @@ function API.getProperties(class: string, tagFilter: Array<string>?, securityFil
 	return memberList
 end
 
-function API.getFunctions(class: string, tagFilter: Array<string>?, securityFilter: Array<string>?): Dictionary<ApiTypes.Function>
+function API.getFunctions(
+	class: string,
+	tagFilter: Array<string>?,
+	securityFilter: Array<string>?
+): Dictionary<ApiTypes.Function>
 	if not dump then
 		error(MODULE_NOT_READY_MESSAGE, 2)
 	end
@@ -158,7 +172,11 @@ function API.getFunctions(class: string, tagFilter: Array<string>?, securityFilt
 	return memberList
 end
 
-function API.getEvents(class: string, tagFilter: Array<string>?, securityFilter: Array<string>?): Dictionary<ApiTypes.Event>
+function API.getEvents(
+	class: string,
+	tagFilter: Array<string>?,
+	securityFilter: Array<string>?
+): Dictionary<ApiTypes.Event>
 	if not dump then
 		error(MODULE_NOT_READY_MESSAGE, 2)
 	end
@@ -191,7 +209,11 @@ function API.getEvents(class: string, tagFilter: Array<string>?, securityFilter:
 	return memberList
 end
 
-function API.getCallbacks(class: string, tagFilter: Array<string>?, securityFilter: Array<string>?): Dictionary<ApiTypes.Callback>
+function API.getCallbacks(
+	class: string,
+	tagFilter: Array<string>?,
+	securityFilter: Array<string>?
+): Dictionary<ApiTypes.Callback>
 	if not dump then
 		error(MODULE_NOT_READY_MESSAGE, 2)
 	end
