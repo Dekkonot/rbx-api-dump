@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## Version 1.1.0
 - Add option to filter out specific class members by name as a fourth parameter to `getMembers`, `getProperties`, etc.
     - Takes the form of a table of `{[ClassName] = {Array of members to omit}}`
 
