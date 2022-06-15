@@ -3,4 +3,5 @@
 *.rbxm
 *.rbxmx
 
+sourcemap.json
 roblox.toml
