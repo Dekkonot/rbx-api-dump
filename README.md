@@ -102,7 +102,7 @@ Returns whether the given class is a Service or not. Essentially equivalent to `
 ### getMembers
 
 ```plaintext
-API.getMembers(class: string, tagFilter: Array<string>?, securityFilter: Array<string>?): Dictionary<Member>
+API.getMembers(class: string, tagFilter: Array<string>?, securityFilter: Array<string>?, memberFilter: Dictionary<Dictionary<boolean>>?): Dictionary<Member>
 ```
 
 Returns a dictionary representing all of a given class's [members](#member).
@@ -111,10 +111,12 @@ If `tagFilter` is provided, it acts an exclusion filter for the tags on members.
 
 If `securityFilter` is provided, it acts identically, except that instead of filtering tags it filters the security of members. For ease of use, some common filters are provided in [filters](#filters)
 
+If `memberFilter` is provided, it acts as a filter to exclude members based on their names. The tree should be composed of a map of superclass names to any members you would like to filter. As an example, something like `API.getMembers("BasePart", {["FormFactorPart"] = {"FormFactor"}})` would prevent `FormFactor` from being included in `BasePart`'s returned members, as `FormFactorPart` is a superclass of `BasePart`.
+
 ### getProperties
 
 ```plaintext
-API.getProperties(class: string, tagFilter: Array<string>?, securityFilter: Array<string>?): Dictionary<Property>
+API.getProperties(class: string, tagFilter: Array<string>?, securityFilter: Array<string>?, memberFilter: Dictionary<Dictionary<boolean>>?): Dictionary<Property>
 ```
 
 Functions identically to [getMembers](#getmembers) but only returns [properties](#properties).
@@ -122,7 +124,7 @@ Functions identically to [getMembers](#getmembers) but only returns [properties]
 ### getFunctions
 
 ```plaintext
-API.getFunctions(class: string, tagFilter: Array<string>?, securityFilter: Array<string>?): Dictionary<Function>
+API.getFunctions(class: string, tagFilter: Array<string>?, securityFilter: Array<string>?, memberFilter: Dictionary<Dictionary<boolean>>?): Dictionary<Function>
 ```
 
 Functions identically to [getMembers](#getmembers) but only returns [functions](#function) (methods).
@@ -130,7 +132,7 @@ Functions identically to [getMembers](#getmembers) but only returns [functions](
 ### getEvents
 
 ```plaintext
-API.getEvents(class: string, tagFilter: Array<string>?, securityFilter: Array<string>?): Dictionary<Event>
+API.getEvents(class: string, tagFilter: Array<string>?, securityFilter: Array<string>?, memberFilter: Dictionary<Dictionary<boolean>>?): Dictionary<Event>
 ```
 
 Functions identically to [getMembers](#getmembers) but only returns [events](#event).
@@ -138,7 +140,7 @@ Functions identically to [getMembers](#getmembers) but only returns [events](#ev
 ### getCallbacks
 
 ```plaintext
-API.getCallbacks(class: string, tagFilter: Array<string>?, securityFilter: Array<string>?): Dictionary<Callback>
+API.getCallbacks(class: string, tagFilter: Array<string>?, securityFilter: Array<string>?, memberFilter: Dictionary<Dictionary<boolean>>?): Dictionary<Callback>
 ```
 
 Functions identically to [getMembers](#getmembers) but only returns [callbacks](#callback).

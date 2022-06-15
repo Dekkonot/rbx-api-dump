@@ -67,11 +67,13 @@ end
 function API.getMembers(
 	class: string,
 	tagFilter: Array<string>?,
-	securityFilter: Array<string>?
+	securityFilter: Array<string>?,
+	memberFilter: Dictionary<Dictionary<boolean>>?
 ): Dictionary<ApiTypes.Member>
 	if not dump then
 		error(MODULE_NOT_READY_MESSAGE, 2)
 	end
+	memberFilter = memberFilter or {}
 
 	local superClasses: Array<ApiTypes.Class> = superClassMap[class]
 	if not superClasses then
@@ -84,6 +86,12 @@ function API.getMembers(
 	local memberList: Dictionary<ApiTypes.Member> = {}
 	for _, superClass in ipairs(superClasses) do
 		for _, v in ipairs(superClass.Members) do
+			-- This is safe to do because we ensure memberFilter exists up at the top of the function.
+			local nameFilterList = (memberFilter :: Dictionary<Dictionary<boolean>>)[superClass.Name]
+			if nameFilterList and nameFilterList[v.Name] then
+				continue
+			end
+
 			if filterSecurity(v.Security, securityLookup) then
 				continue
 			end
@@ -101,11 +109,13 @@ end
 function API.getProperties(
 	class: string,
 	tagFilter: Array<string>?,
-	securityFilter: Array<string>?
+	securityFilter: Array<string>?,
+	memberFilter: Dictionary<Dictionary<boolean>>?
 ): Dictionary<ApiTypes.Property>
 	if not dump then
 		error(MODULE_NOT_READY_MESSAGE, 2)
 	end
+	memberFilter = memberFilter or {}
 
 	local superClasses: Array<ApiTypes.Class> = superClassMap[class]
 	if not superClasses then
@@ -119,6 +129,11 @@ function API.getProperties(
 	for _, superClass in ipairs(superClasses) do
 		for _, v in ipairs(superClass.Members) do
 			if v.MemberType ~= "Property" then
+				continue
+			end
+			-- This is safe to do because we ensure memberFilter exists up at the top of the function.
+			local nameFilterList = (memberFilter :: Dictionary<Dictionary<boolean>>)[superClass.Name]
+			if nameFilterList and nameFilterList[v.Name] then
 				continue
 			end
 			if filterSecurity(v.Security, securityLookup) then
@@ -138,11 +153,13 @@ end
 function API.getFunctions(
 	class: string,
 	tagFilter: Array<string>?,
-	securityFilter: Array<string>?
+	securityFilter: Array<string>?,
+	memberFilter: Dictionary<Dictionary<boolean>>?
 ): Dictionary<ApiTypes.Function>
 	if not dump then
 		error(MODULE_NOT_READY_MESSAGE, 2)
 	end
+	memberFilter = memberFilter or {}
 
 	local superClasses: Array<ApiTypes.Class> = superClassMap[class]
 	if not superClasses then
@@ -156,6 +173,11 @@ function API.getFunctions(
 	for _, superClass in ipairs(superClasses) do
 		for _, v in ipairs(superClass.Members) do
 			if v.MemberType ~= "Function" then
+				continue
+			end
+			-- This is safe to do because we ensure memberFilter exists up at the top of the function.
+			local nameFilterList = (memberFilter :: Dictionary<Dictionary<boolean>>)[superClass.Name]
+			if nameFilterList and nameFilterList[v.Name] then
 				continue
 			end
 			if filterSecurity(v.Security, securityLookup) then
@@ -175,11 +197,13 @@ end
 function API.getEvents(
 	class: string,
 	tagFilter: Array<string>?,
-	securityFilter: Array<string>?
+	securityFilter: Array<string>?,
+	memberFilter: Dictionary<Dictionary<boolean>>?
 ): Dictionary<ApiTypes.Event>
 	if not dump then
 		error(MODULE_NOT_READY_MESSAGE, 2)
 	end
+	memberFilter = memberFilter or {}
 
 	local superClasses: Array<ApiTypes.Class> = superClassMap[class]
 	if not superClasses then
@@ -193,6 +217,11 @@ function API.getEvents(
 	for _, superClass in ipairs(superClasses) do
 		for _, v in ipairs(superClass.Members) do
 			if v.MemberType ~= "Event" then
+				continue
+			end
+			-- This is safe to do because we ensure memberFilter exists up at the top of the function.
+			local nameFilterList = (memberFilter :: Dictionary<Dictionary<boolean>>)[superClass.Name]
+			if nameFilterList and nameFilterList[v.Name] then
 				continue
 			end
 			if filterSecurity(v.Security, securityLookup) then
@@ -212,11 +241,13 @@ end
 function API.getCallbacks(
 	class: string,
 	tagFilter: Array<string>?,
-	securityFilter: Array<string>?
+	securityFilter: Array<string>?,
+	memberFilter: Dictionary<Dictionary<boolean>>?
 ): Dictionary<ApiTypes.Callback>
 	if not dump then
 		error(MODULE_NOT_READY_MESSAGE, 2)
 	end
+	memberFilter = memberFilter or {}
 
 	local superClasses: Array<ApiTypes.Class> = superClassMap[class]
 	if not superClasses then
@@ -230,6 +261,11 @@ function API.getCallbacks(
 	for _, superClass in ipairs(superClasses) do
 		for _, v in ipairs(superClass.Members) do
 			if v.MemberType ~= "Callback" then
+				continue
+			end
+			-- This is safe to do because we ensure memberFilter exists up at the top of the function.
+			local nameFilterList = (memberFilter :: Dictionary<Dictionary<boolean>>)[superClass.Name]
+			if nameFilterList and nameFilterList[v.Name] then
 				continue
 			end
 			if filterSecurity(v.Security, securityLookup) then

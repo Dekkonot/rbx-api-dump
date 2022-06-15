@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+- Add option to filter out specific class members by name as a fourth parameter to `getMembers`, `getProperties`, etc.
+    - Takes the form of a table of `{[ClassName] = {Array of members to omit}}`
+
 ## Version 1.0.2
 - Rename `default.project.json` to `dev.project.json`
 - Rename `build.project.json` to `default.project.json`
