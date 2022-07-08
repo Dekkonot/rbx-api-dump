@@ -111,7 +111,7 @@ If `tagFilter` is provided, it acts an exclusion filter for the tags on members.
 
 If `securityFilter` is provided, it acts identically, except that instead of filtering tags it filters the security of members. For ease of use, some common filters are provided in [filters](#filters)
 
-If `memberFilter` is provided, it acts as a filter to exclude members based on their names. The tree should be composed of a map of superclass names to any members you would like to filter. As an example, something like `API.getMembers("BasePart", {["FormFactorPart"] = {"FormFactor"}})` would prevent `FormFactor` from being included in `BasePart`'s returned members, as `FormFactorPart` is a superclass of `BasePart`.
+If `memberFilter` is provided, it acts as a filter to exclude members based on their names. The tree should be composed of a map of superclass names to any members you would like to filter. As an example, something like `API.getMembers("BasePart", {["FormFactorPart"] = {["FormFactor"] = true}})` would prevent `FormFactor` from being included in `BasePart`'s returned members, as `FormFactorPart` is a superclass of `BasePart`.
 
 ### getProperties
 
